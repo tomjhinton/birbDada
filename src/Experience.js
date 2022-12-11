@@ -1,13 +1,23 @@
 import { useState, useMemo, useRef } from "react"
 import Piece from "./Piece"
 import { Physics, RigidBody } from '@react-three/rapier'
-import { OrbitControls } from "@react-three/drei"
+import { Html, OrbitControls } from "@react-three/drei"
 import { useFrame } from "@react-three/fiber"
 export default function Experience(){
 
     let [pieces, setPieces] = useState(50)
+    let [reset, setReset] = useState(false)
+
+    function doReset(){
+        setReset(!reset)
+        console.log(reset)
+        piecesArr.map((x, index)=>{
+            x.position.y = index
+        })
+    }
 
     let scene = useRef()
+    let time = useRef()
 
     const piecesArr = useMemo(() => {
         const piecesArr = []
@@ -20,10 +30,9 @@ export default function Experience(){
     
         })}
         return piecesArr
-    },[])
+    },[reset])
 
     useFrame((state, delta) => {
-       console.log(Math.sin(state.clock.elapsedTime * .2) * .002)
 
         state.camera.position.y += Math.sin(state.clock.elapsedTime * .2) * .002
         // state.camera.position.y += Math.cos(delta) * .2
@@ -36,7 +45,11 @@ export default function Experience(){
     return(
 
         <>
-
+        <Html>
+            <div className="title" onClick={doReset}>
+                DADA
+            </div>
+        </Html>
       
         <Physics>
       

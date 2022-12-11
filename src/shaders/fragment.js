@@ -61,12 +61,12 @@ vec2 rotate2D (vec2 _st, float _angle) {
 
 void main() {
   vec2 uv = vUv;
-  uv= rotate2D(uv, noise);
+  uv= rotate2D(uv, noise + uTime);
   vec4 texture = texture2D(pic, uv);
 
   texture.a = step(cnoise(uv * noise), .1);
 
-  
+
 
   gl_FragColor = texture;
 }`

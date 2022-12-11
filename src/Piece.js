@@ -27,7 +27,7 @@ export default function Piece(props){
     )
     extend({PieceMaterial})
 
-
+   
 
     return(
 
